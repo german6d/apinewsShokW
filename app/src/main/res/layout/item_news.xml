@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="16dp"
+    android:background="@color/black"
+    android:layout_margin="10dp"
+    android:layout_height="440dp">
+
+    <LinearLayout
+        android:id="@+id/LinearGoNew"
+        android:layout_width="match_parent"
+        android:layout_height="340dp"
+        android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivNewImage"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/tvNews"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:text=""
+        android:layout_marginTop="0dp"
+        android:gravity="center_horizontal"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/viewSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="360dp"
+        app:layout_behavior="@+id/tvNews"
+        android:layout_marginBottom="1dp"
+        android:background="#787878" />
+
+    <ImageView
+        android:id="@+id/ivNewSave"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center|bottom"
+        app:layout_behavior="@+id/viewSeparator"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        android:src="@drawable/ic_baseline_bookmark_guardado" />
+
+    <ImageView
+        android:id="@+id/ivNewSaveRemove"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center|bottom"
+        app:layout_behavior="@+id/viewSeparator"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        android:src="@drawable/ic_baseline_bookmark_remove" />
+
+</androidx.cardview.widget.CardView>
