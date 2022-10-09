@@ -1,7 +1,10 @@
 package com.gars.apinewsshokw
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.gars.apinewsshokw.adapters.MyAdapter
 import com.gars.apinewsshokw.databinding.ActivityMainBinding
@@ -20,6 +23,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        adjustFontScale(resources.configuration, applicationContext)
 
         tabLayout = binding.tabLayout
         viewPager = binding.viewPager
@@ -46,5 +51,16 @@ class MainActivity : AppCompatActivity() {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
 
         })
+    }
+
+    private fun adjustFontScale(configuration: Configuration?, applicationContext: Context?) {
+
+        configuration!!.fontScale = 1.0.toFloat()
+        val metrics = resources.displayMetrics
+        val wm = applicationContext!!.getSystemService(WINDOW_SERVICE) as WindowManager
+        wm.defaultDisplay.getMetrics(metrics)
+        metrics.scaledDensity = configuration!!.fontScale * metrics.density
+        applicationContext!!.resources.updateConfiguration(configuration, metrics)
+
     }
 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.gars.apinewsshokw.R
 import com.gars.apinewsshokw.databinding.ItemNewsBinding
 import com.gars.apinewsshokw.db.DBHelper
 import com.gars.apinewsshokw.fragments.ArticleWebViewFragment
@@ -36,11 +37,9 @@ class NewsViewHolder (view: View): RecyclerView.ViewHolder(view) {
                     while (cursor.moveToNext()) {
 
                         val label = cursor.getString(2)
-                        //println("holder count 1 " + cursor.count)
 
 
                         if (label == urlNew) {
-                            println("holder count 1 $label")
                             binding.ivNewSaveRemove.visibility = View.VISIBLE
                             binding.ivNewSave.visibility = View.GONE
                         }
@@ -49,7 +48,6 @@ class NewsViewHolder (view: View): RecyclerView.ViewHolder(view) {
                 }
 
                 if (cursor.count == 0) {
-                    println("holder count 0 " + cursor.count)
                     binding.ivNewSave.visibility = View.VISIBLE
 
                 }
@@ -89,7 +87,7 @@ class NewsViewHolder (view: View): RecyclerView.ViewHolder(view) {
 
             db.addArticle(title, urlNew, image)
 
-            Toast.makeText(binding.ivNewImage.context, "Noticia favorita guardada.",
+            Toast.makeText(binding.ivNewImage.context, binding.tvNews.context.getString(R.string.new_save),
                 Toast.LENGTH_LONG).show()
 
 

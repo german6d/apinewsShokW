@@ -8,18 +8,20 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gars.apinewsshokw.adapters.NewsAdapter
-import com.gars.apinewsshokw.adapters.NewsProfileAdapter
 import com.gars.apinewsshokw.api.APIService
 import com.gars.apinewsshokw.databinding.FragmentHomeBinding
-import com.gars.apinewsshokw.db.DBHelper
 import com.gars.apinewsshokw.models.Article
-import com.gars.apinewsshokw.models.ArticleDB
+import com.gars.apinewsshokw.models.NewsResponse
+import com.gars.apinewsshokw.utils.Constants.Companion.API_KEY
+import com.gars.apinewsshokw.utils.Constants.Companion.BASE_URL
+import com.gars.apinewsshokw.utils.Constants.Companion.END_POINT_NEWS_API
+import com.gars.apinewsshokw.utils.Constants.Companion.NEWS_COUNTRY
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import kotlin.concurrent.fixedRateTimer
 
 
 class HomeFragment : Fragment() {
@@ -42,10 +44,7 @@ class HomeFragment : Fragment() {
 
         return binding.root
 
-
     }
-
-
 
     private fun initRecyclerView() {
 
@@ -55,7 +54,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun getRetrofit(): Retrofit {
-        return Retrofit.Builder().baseUrl("https://newsapi.org/v2/")
+        return Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -67,7 +66,9 @@ class HomeFragment : Fragment() {
 
         CoroutineScope(Dispatchers.IO ).launch {
 
-            val call = getRetrofit().create(APIService::class.java).getNews("top-headlines?country=ve&apiKey=5c9f0c8a709e4c0aaa447f82959f3b5c")
+            val call = getRetrofit().create(APIService::class.java).getNews(
+                "$END_POINT_NEWS_API?country=$NEWS_COUNTRY&apiKey=$API_KEY")
+
             val news = call.body()
 
             activity?.runOnUiThread {
@@ -84,8 +85,8 @@ class HomeFragment : Fragment() {
 
                     adapter.notifyDataSetChanged()
 
-                }else{
-                    showError()
+                } else{
+                    showError(call)
                 }
 
             }
@@ -94,17 +95,10 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun showError() {
+    private fun showError(call: Response<NewsResponse>) {
         Toast.makeText(context, "Ha ocurrido un error", Toast.LENGTH_SHORT).show()
+        println(call)
     }
-
-    private fun updateData() {
-
-        adapter = NewsAdapter(newsImages)
-        adapter.notifyDataSetChanged()
-    }
-
-
 
 }
 

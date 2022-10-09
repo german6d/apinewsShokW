@@ -150,7 +150,7 @@ class ArticleWebViewFragment : Fragment() {
 
         db!!.deleteArticle(article_url_db)
 
-        Toast.makeText(binding.webViewArticle.context, "Noticia eliminada de favoritas.",
+        Toast.makeText(binding.webViewArticle.context, binding.webViewArticle.context.getString(R.string.new_delete),
             Toast.LENGTH_LONG).show()
 
     }
@@ -163,7 +163,7 @@ class ArticleWebViewFragment : Fragment() {
 
         db.close()
 
-        Toast.makeText(context, "Noticia favorita guardada.", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, context.getString(R.string.new_save), Toast.LENGTH_LONG).show()
 
     }
 

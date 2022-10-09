@@ -56,7 +56,6 @@ class NewsProfileFragment : Fragment() {
             while (cursor.moveToNext()) {
 
                 newsProfileImages.clear()
-                //binding.rvNewsProfile.adapter = null
 
                 val newsProfileArrayList = db.readCourses()
 
@@ -104,18 +103,6 @@ class NewsProfileFragment : Fragment() {
                 adapter.notifyDataSetChanged()
             }
         }
-
-        /*else {
-
-            println("ENTRO AQUI 2 OLD LIST $oldList - NEW LIST $newList")
-            adapter = NewsProfileAdapter(newsProfileArrayList3 as MutableList<ArticleDB>)
-            binding.rvNewsProfile.layoutManager = LinearLayoutManager(context)
-            binding.rvNewsProfile.adapter = adapter
-            adapter.notifyDataSetChanged()
-            newsProfileImages.clear()
-            newsProfileImages.addAll(newsProfileArrayList2)
-
-        }*/
     }
 
 
